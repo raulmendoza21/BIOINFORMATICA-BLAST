@@ -1,0 +1,22 @@
+{
+  "version": "1.2",
+  "dbname": "proteinasbase",
+  "dbtype": "Protein",
+  "db-version": 5,
+  "description": "mis_proteinas.fasta",
+  "number-of-letters": 120,
+  "number-of-sequences": 2,
+  "last-updated": "2025-12-04T19:42:00",
+  "number-of-volumes": 1,
+  "bytes-total": 1000443,
+  "bytes-to-cache": 247,
+  "files": [
+    "proteinasbase.pdb",
+    "proteinasbase.phr",
+    "proteinasbase.pin",
+    "proteinasbase.pot",
+    "proteinasbase.psq",
+    "proteinasbase.ptf",
+    "proteinasbase.pto"
+  ]
+}

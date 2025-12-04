@@ -1,0 +1,2 @@
+id	longitud	evalue	porc_identidad
+gnl|BL_ORD_ID|1	60	3.32032e-45	100.00
