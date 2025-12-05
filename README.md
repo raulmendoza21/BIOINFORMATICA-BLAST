@@ -1,139 +1,86 @@
-# BIOINFORMATICA-BLAST  
-Autores: Raul Mendoza, Adrian Ojeda  
-Asignatura: Bioinformatica (ULPGC)
+# BIOINFORMATICA-BLAST
+**Autores:** Raul Mendoza, Adrian Ojeda  
+**Asignatura:** Bioinformática (ULPGC)
 
-Este repositorio contiene exclusivamente la **práctica de BLAST (Sesión 04)** del laboratorio de Bioinformática.  
-Aquí encontrarás el cuaderno `Bioinformatica_Sesion04_BLAST.ipynb`, donde se resuelven todos los ejercicios relacionados con el uso de **BLAST online y local** mediante Biopython.
-
----
-
-# Contenido del proyecto
-
-## Archivo principal
-### `Bioinformatica_Sesion04_BLAST.ipynb`
-Este cuaderno resuelve los cuatro ejercicios de la práctica:
+Este repositorio contiene la resolución completa de la **práctica de BLAST (Sesión 04)**.  
+El proyecto implementa scripts en Python (utilizando **Biopython**) para realizar alineamientos de secuencias biológicas tanto en servidores remotos (**Online**) como en la propia máquina (**Local**).
 
 ---
 
-## EJERCICIO 1 – BLASTN con secuencia introducida por teclado  
-**Objetivo:**  
-Pedir al usuario una secuencia de ADN por teclado y realizar un **BLASTN**:
+# Contenido del Proyecto
 
-- De forma **online** usando los servidores de NCBI.  
-- De forma **local** usando BLAST+ instalado en la máquina.
+El cuaderno principal `Bioinformatica_Sesion04_BLAST.ipynb` resuelve los 4 ejercicios propuestos:
 
-**El programa debe mostrar:**
-- Número de resultados (hits).  
-- E-value del mejor hit.  
-- Descripción del hit más similar.  
+---
 
-**Funciones implementadas:**
-- `blastn_online_desde_teclado()`  
-- `blastn_local_desde_teclado()`
+## 1. EJERCICIO 1: BLASTN (ADN)
+- Búsqueda de secuencias nucleotídicas introducidas por teclado.
+- **Online:** Contra la base de datos `nt` del NCBI.
+- **Local:** Contra una base de datos propia (`genomasbase`).
+- Incluye identificación del mejor hit, E‑value y descripción.
 
-**Cómo ejecutarlas en una celda nueva:**
-```python
-blastn_online_desde_teclado()
-# o
-blastn_local_desde_teclado()
+---
+
+## 2. EJERCICIO 2: BLASTP (Proteínas)
+- Búsqueda de secuencias proteicas.
+- **Filtrado:** Genera un archivo `.txt` con todos los hits cuyo **E-value < 0.001**.
+- Incluye cálculo de porcentaje de identidad y longitud del alineamiento.
+
+---
+
+## 3. EJERCICIO 3: Filtrado por Organismo
+- Lectura de secuencias desde archivo FASTA.
+- **Online:** Utiliza filtros nativos de NCBI (`entrez_query`) para restringir resultados a una especie concreta.
+- **Local:** Aplica filtrado analizando la descripción o ID de cada hit.
+- Calcula el E‑value medio de los hits filtrados.
+
+---
+
+## 4. EJERCICIO 4: Suite Completa BLAST
+Incluye ejemplos ejecutables de las 5 herramientas principales:
+
+- `blastn`
+- `blastp`
+- `blastx`
+- `tblastn`
+- `tblastx`
+
+Con secuencias reales y análisis de resultados biológicos coherentes.
+
+---
+
+# Requisitos Previos
+
+### 1. Python 3.8+ y dependencias
+```bash
+pip install biopython jupyter
+```
+
+### 2. BLAST+ del NCBI
+Debes tener instalado BLAST+:
+
+https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+
+**Importante:**  
+La carpeta `bin` debe estar añadida al PATH del sistema.
+
+Ejemplo en Windows:
+
+```
+C:\Program Files\NCBI\blast-2.17.0+\bin
+```
+
+Puedes comprobarlo ejecutando:
+
+```bash
+blastn -version
 ```
 
 ---
 
-## EJERCICIO 2 – BLASTP con filtrado por E-value  
-**Objetivo:**  
-Pedir una secuencia proteica por teclado y realizar un **BLASTP**:
+# Instalación y Configuración (LOCAL)
 
-- Online y local.  
-- Guardar en un fichero todos los hits con **E-value < 0.001**, incluyendo:  
-  - ID  
-  - Longitud  
-  - E-value  
-  - Porcentaje de identidad  
-
-**Funciones:**
-- `blastp_online_filtrado()`  
-- `blastp_local_filtrado()`
-
-**Ejemplo de uso:**
-```python
-blastp_online_filtrado()
-# Genera el archivo: blastp_online_filtrado.txt
-```
-
----
-
-## EJERCICIO 3 – BLASTN desde un archivo FASTA filtrando por organismo  
-**Objetivo:**  
-Leer una secuencia de ADN desde un archivo FASTA, ejecutar BLASTN y **filtrar resultados por organismo**.
-
-**El programa debe:**
-- Mostrar cuántos resultados pertenecen al organismo filtrado.  
-- Calcular y mostrar el **E-value medio** de esos hits.  
-
-**Funciones:**
-- `blastn_online_desde_fasta_filtrado_organismo(fasta, organismo)`  
-- `blastn_local_desde_fasta_filtrado_organismo(fasta, organismo)`
-
-**Ejemplo de uso:**
-```python
-blastn_online_desde_fasta_filtrado_organismo("query.fasta", "Homo sapiens")
-```
-
----
-
-## EJERCICIO 4 – Uso de las cinco utilidades de la suite BLAST  
-Las herramientas evaluadas son:
-
-1. `blastn`  
-2. `blastp`  
-3. `blastx`  
-4. `tblastn`  
-5. `tblastx`
-
-El objetivo es:
-- Ejecutar un ejemplo online y local con cada utilidad.  
-- Revisar qué especies contienen los homólogos más cercanos.  
-- Observar porcentajes de identidad y cobertura.  
-
-**Funciones online:**
-- `lanzar_blastn_online(secuencia)`
-- `lanzar_blastp_online(secuencia)`
-- `lanzar_blastx_online(secuencia)`
-- `lanzar_tblastn_online(secuencia)`
-- `lanzar_tblastx_online(secuencia)`
-
-**Funciones locales:**
-- `ejemplos_blast_local(dna_seq, prot_seq)`
-
-**Mostrar resumen de hits:**
-```python
-resumen_mejor_hit(record)
-```
-
----
-
-# Requisitos
-
-## Python
-- Python 3.8+  
-- Bibliotecas necesarias:
-  ```
-  pip install biopython jupyter
-  ```
-
-## Para BLAST online
-- Conexión a internet.  
-- Una dirección de correo (NCBI lo solicita por responsabilidad).
-
-## Para BLAST local
-- Tener instalado **BLAST+** (blastn, blastp, blastx, tblastn, tblastx).  
-- Tener bases de datos locales creadas con `makeblastdb`.  
-- Tener los ejecutables en el PATH o indicar sus rutas completas.
-
----
-
-# Cómo ejecutar el proyecto
+Para que los ejercicios locales funcionen, debes crear las bases de datos BLAST de forma manual o automática.
 
 ## 1. Clonar el repositorio
 ```bash
@@ -141,32 +88,96 @@ git clone https://github.com/raulmendoza21/BIOINFORMATICA-BLAST.git
 cd BIOINFORMATICA-BLAST
 ```
 
-## 2. Abrir Jupyter Notebook
+## 2. Generar las Bases de Datos Locales
+
+Asegúrate de tener los archivos:
+
+```
+mis_genomas.fasta
+mis_proteinas.fasta
+```
+
+(Están incluidos en el repositorio o pueden ser creados manualmente.)
+
+### A) Crear base de datos de nucleótidos (genomasbase)
+```bash
+makeblastdb -in mis_genomas.fasta -dbtype nucl -out genomasbase
+```
+
+### B) Crear base de datos de proteínas (proteinasbase)
+```bash
+makeblastdb -in mis_proteinas.fasta -dbtype prot -out proteinasbase
+```
+
+⚠️ **Nota importante en Windows:**  
+Evita trabajar en rutas con espacios, tildes o la letra Ñ, ya que BLAST+ puede fallar al generar o buscar los archivos de base de datos.
+
+---
+
+# Guía de Ejecución
+
+### 1. Iniciar Jupyter Notebook
 ```bash
 jupyter notebook
 ```
 
-## 3. Abrir el archivo
+### 2. Abrir el archivo  
 `Bioinformatica_Sesion04_BLAST.ipynb`
 
-## 4. Ejecutar todas las celdas de definición
-Menú: **Cell → Run All**
+### 3. Ejecutar el cuaderno
+Primero ejecuta todas las celdas con definiciones (`def ...`).  
+Luego usa las celdas de prueba para lanzar cada ejercicio.
 
-## 5. Llamar a las funciones según el ejercicio
-Cada ejercicio requiere que escribas una celda nueva con llamadas como:
+---
+
+# Ejemplos de llamadas a funciones
 
 ```python
-blastn_online_desde_teclado()
-blastp_online_filtrado()
-blastn_online_desde_fasta_filtrado_organismo("query.fasta", "Homo sapiens")
-ejemplos_blast_local(dna_ejemplo, prot_ejemplo)
+# Ejercicio 1 (Online)
+blastn_online_desde_teclado_mejorado()
+
+# Ejercicio 2 (Local)
+blastp_local_filtrado()
+
+# Ejercicio 4 completo (Online)
+ejercicio_4_online_completo()
 ```
 
 ---
 
-# Notas finales
+# Solución de Problemas Comunes
 
-- Si usas BLAST local, asegúrate de que las bases de datos existen y están bien configuradas.  
-- El cuaderno está comentado en estilo claro de alumno universitario, según lo pedido en la práctica.  
-- El repositorio contiene exclusivamente la práctica de BLAST, sin incluir contenidos de alineamientos.
+### ❗ 1. `Command not found` o `FileNotFoundError`
+BLAST+ no está instalado o no está en el PATH.  
+Comprueba con:
 
+```bash
+blastn -version
+```
+
+### ❗ 2. Error “No alias or index file found”
+La base de datos local no existe o no se generó bien.  
+Ejecuta nuevamente `makeblastdb`.
+
+### ❗ 3. BLAST Online tarda mucho
+Es normal. Depende de los servidores del NCBI.
+
+### ❗ 4. Cero resultados en BLAST local
+Asegúrate de que las secuencias existen realmente en tus `.fasta`.  
+Si la secuencia es muy corta, `blastn-short` puede ayudar.
+
+---
+
+# Estructura del repositorio
+
+```
+BIOINFORMATICA-BLAST/
+│── Bioinformatica_Sesion04_BLAST.ipynb
+│── mis_genomas.fasta
+│── mis_proteinas.fasta
+│── genomasbase.*      (generados con makeblastdb)
+│── proteinasbase.*    (generados con makeblastdb)
+│── README.md
+```
+
+Este README resume la práctica completa de BLAST y cómo ejecutar cada ejercicio en modo **online** y **local**.
